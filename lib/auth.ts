@@ -44,9 +44,20 @@ export const authOptions = {
         signIn: "/login"
     },
     callbacks: {
-        async session({ session, token }: {session:any, token: any}) {
+        async jwt({ token, user }: { token: any, user: any }) {
+            if (user) {
+                // Sirf pehli baar — login pe
+                await connectDb()
+                const dbUser = await User.findById(user._id).lean() as any
+                token.picture = dbUser?.avatar || ""
+                token.id = user._id
+            }
+            return token
+        },
+        async session({ session, token }: { session: any, token: any }) {
             if (session.user) {
-                session.user.id = token.sub!
+                session.user.id = token.id
+                session.user.image = token.picture
             }
             return session
         }
