@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Tribly - Social App",
   description: "Tribly is a Social Media platform designed with simplicity",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
