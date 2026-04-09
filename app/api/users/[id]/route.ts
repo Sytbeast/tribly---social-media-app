@@ -3,7 +3,7 @@ import User from "@/models/User";
 import { NextRequest, NextResponse } from "next/server";
 
 
-export async function PATCH(req:NextRequest, {params}:{params:{id:string}}){
+export async function PATCH(req:NextRequest, {params}:{params:Promise<{id:string}>}){
     await connectDb();
 
     const { id } = await params

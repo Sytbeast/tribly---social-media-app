@@ -4,7 +4,7 @@ import Post from "@/models/Post";
 import { getServerSession } from "next-auth";
 import { NextResponse , NextRequest } from "next/server";
 
-export async function DELETE(req:NextRequest, {params}:{params:{id:string}}){
+export async function DELETE(req:NextRequest, {params}:{params:Promise<{id:string}>}){
     await connectDb();
 
     const session = await getServerSession(authOptions)
